@@ -23,9 +23,8 @@ public class DataInitializer implements CommandLineRunner {
             if (!typeIdRepository.existsByCode(type)) {
                 TypeIdEntity newType = new TypeIdEntity();
                 newType.setCode(type);
-                newType.setDescription(type.getDescription());
                 typeIdRepository.save(newType);
-                log.info("Document type inserted: {} ({})", type.getCode(), type.getDescription());
+                log.info("Document type inserted: {}", type.getCode());
             }
         });
         log.info("DataInitializer completed");

@@ -27,6 +27,13 @@ public class PersonEntity extends BaseEntity{
 
     private String extraData;
 
+    private String address;
+    private String city;
+    private String country;
+    private Double latitude;
+    private Double longitude;
+
+
     @ManyToOne
     @JoinColumn(name = "type_id_id")
     private TypeIdEntity typeIdEntity;

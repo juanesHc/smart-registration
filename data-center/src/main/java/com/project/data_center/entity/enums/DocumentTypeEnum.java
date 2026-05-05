@@ -2,7 +2,7 @@ package com.project.data_center.entity.enums;
 
 import lombok.Getter;
 
-@Getter
+
 public enum DocumentTypeEnum {
 
     CC("Cédula de Ciudadanía"),

@@ -16,7 +16,4 @@ public class TypeIdEntity extends BaseEntity{
     @Column(unique = true, nullable = false, length = 20)
     private DocumentTypeEnum code;
 
-    @Column(nullable = false, length = 100)
-    private String description;
-
 }
