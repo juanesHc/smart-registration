@@ -1,0 +1,54 @@
+# ===== Variables de entorno (NUNCA commitear) =====
+.env
+.env.local
+.env.*.local
+**/.env
+!**/.env.example
+
+# ===== Java / Spring Boot =====
+target/
+*.class
+*.jar
+*.war
+*.log
+.mvn/
+mvnw
+mvnw.cmd
+.gradle/
+build/
+
+# ===== Python / FastAPI =====
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+.venv/
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+
+# ===== Node / Angular =====
+node_modules/
+dist/
+.angular/
+*.tsbuildinfo
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ===== IDEs =====
+.idea/
+.vscode/
+*.iml
+*.swp
+.DS_Store
+
+# ===== Docker =====
+# (los archivos de Docker SÍ se commitean, solo ignoramos volúmenes locales si los hubiera)
+
+# ===== PostgreSQL data (si montas volumen local en vez de docker volume) =====
+postgres-data/
