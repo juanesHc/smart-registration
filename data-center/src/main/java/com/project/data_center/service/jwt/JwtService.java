@@ -32,8 +32,8 @@ public class JwtService {
 
     public String generateToken(SecurityUser user) {
         return Jwts.builder()
-                .subject(user.getId().toString())          // ← UUID en sub
-                .claim("email", user.getUsername())         // ← email como claim
+                .subject(user.getId().toString())
+                .claim("email", user.getUsername())
                 .issuedAt(new Date())
                 .expiration(new Date(System.currentTimeMillis() + jwtExpiration))
                 .signWith(getSigningKey())

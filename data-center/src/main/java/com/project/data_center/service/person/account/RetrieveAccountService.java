@@ -2,10 +2,8 @@ package com.project.data_center.service.person.account;
 
 import com.project.data_center.dto.person.response.RetrievePersonDataResponseDto;
 import com.project.data_center.entity.PersonEntity;
-import com.project.data_center.entity.TypeIdEntity;
 import com.project.data_center.entity.enums.MessageCodes;
 import com.project.data_center.exception.RetrievePersonDataException;
-import com.project.data_center.exception.RetrieveTypeId;
 import com.project.data_center.mapper.PersonMapper;
 import com.project.data_center.repository.PersonRepository;
 

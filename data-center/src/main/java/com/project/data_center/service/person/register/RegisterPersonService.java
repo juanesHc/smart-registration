@@ -16,6 +16,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Objects;
+
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -29,6 +31,10 @@ public class RegisterPersonService {
         @Transactional
         public RegisterPersonResponseDto registerPerson(RegisterPersonRequestDto request) {
             log.info("Starting registration for email: {}", request.getEmail());
+
+            if(!Objects.equals(request.getConfirmPassword(), request.getPassword())){
+                throw new RegisterPersonException(MessageCodes.PASSWORDS_DO_NOT_MATCH);
+            }
 
             DocumentTypeEnum documentTypeEnum = parseDocumentType(request.getDocumentType());
 

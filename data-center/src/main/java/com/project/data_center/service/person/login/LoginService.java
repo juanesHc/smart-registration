@@ -1,4 +1,4 @@
-package com.project.data_center.service.login;
+package com.project.data_center.service.person.login;
 
 import com.project.data_center.dto.person.request.LoginRequestDto;
 import com.project.data_center.dto.person.response.LoginResponseDto;
@@ -12,10 +12,6 @@ import com.project.data_center.service.jwt.JwtService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -26,11 +22,16 @@ import org.springframework.stereotype.Service;
 public class LoginService {
 
     private final PersonRepository personRepository;
-    private final AuthenticationManager authenticationManager;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
+    private final static String gmailExtension="@gmail.com";
 
     public LoginResponseDto login(LoginRequestDto loginRequestDto) {
+
+        if(!loginRequestDto.getEmail().contains(gmailExtension)){
+            loginRequestDto.setEmail(loginRequestDto.getEmail()+gmailExtension);
+        }
+        log.info(loginRequestDto.getEmail());
         PersonEntity personEntity=personRepository.findByEmail((loginRequestDto.getEmail())).
                 orElseThrow(()->new RetrievePersonDataException(MessageCodes.PERSON_NOT_FOUND));
 
@@ -39,11 +40,6 @@ public class LoginService {
             throw new LoginException(MessageCodes.INVALID_CREDENTIALS);
         }
 
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(loginRequestDto.getEmail(),loginRequestDto.getPassword())
-        );
-
-        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         LoginResponseDto loginResponseDto = new LoginResponseDto();
         SecurityUser securityUser=new SecurityUser(personEntity);
         loginResponseDto.setToken(jwtService.generateToken(securityUser));

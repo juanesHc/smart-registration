@@ -26,6 +26,7 @@ public class RegisterPersonRequestDto {
     @NotBlank(message = MessageCodes.EMAIL_REQUIRED)
     @Email(message = MessageCodes.EMAIL_FORMAT_INVALID)
     @Size(max = 100, message = MessageCodes.EMAIL_LENGTH_INVALID)
+    @Pattern(regexp = "^[a-zA-Z0-9._%+-]+@gmail\\.com$",message = MessageCodes.EMAIL_MUST_BE_GMAIL)
     private String email;
 
     @NotBlank(message = MessageCodes.PHONE_REQUIRED)
@@ -39,7 +40,11 @@ public class RegisterPersonRequestDto {
 
     @NotBlank(message = MessageCodes.PASSWORD_REQUIRED)
     @Size(min = 8, max = 50, message = MessageCodes.PASSWORD_LENGTH_INVALID)
+    @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{8,50}$",message = MessageCodes.PASSWORD_FORMAT_INVALID)
     private String password;
+
+    @NotBlank(message = MessageCodes.CONFIRM_PASSWORD_REQUIRED)
+    private String confirmPassword;
 
     private String extraData;
 

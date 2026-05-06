@@ -2,7 +2,8 @@ package com.project.data_center.controller.person.login;
 
 import com.project.data_center.dto.person.request.LoginRequestDto;
 import com.project.data_center.dto.person.response.LoginResponseDto;
-import com.project.data_center.service.login.LoginService;
+
+import com.project.data_center.service.person.login.LoginService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

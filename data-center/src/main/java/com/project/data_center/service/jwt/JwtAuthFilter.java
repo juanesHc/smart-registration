@@ -1,5 +1,7 @@
 package com.project.data_center.service.jwt;
 
+import com.project.data_center.entity.enums.MessageCodes;
+import com.project.data_center.exception.LoginException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -48,8 +50,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
                 if (jwtService.isTokenValid(jwt, email)) {
                     UsernamePasswordAuthenticationToken authToken =
                             new UsernamePasswordAuthenticationToken(
-                                    userId.toString(),                  // ← UUID como principal
-                                    null,
+                                    userId.toString(),
                                     userDetails.getAuthorities()
                             );
                     authToken.setDetails(
@@ -60,7 +61,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
             }
         } catch (Exception ex) {
             log.warn("JWT validation failed: {}", ex.getMessage());
-            // No setea autenticación, el endpoint protegido devolverá 401
+            throw new LoginException(MessageCodes.TOKEN_INVALID);
         }
 
         filterChain.doFilter(request, response);
