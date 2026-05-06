@@ -25,8 +25,8 @@ public class AccountController {
 
     @GetMapping("/me")
     public ResponseEntity<RetrievePersonDataResponseDto> getPersonData(Authentication authentication){
-        String email = authentication.getName();
-        return ResponseEntity.ok(retrieveAccountService.retrievePersonData(email));
+        String id = authentication.getName();
+        return ResponseEntity.ok(retrieveAccountService.retrievePersonData(id));
 
     }
 
@@ -35,20 +35,19 @@ public class AccountController {
             @Valid @RequestBody UpdatePersonDataRequestDto request,
             Authentication authentication) {
 
-        String email = authentication.getName();
-       return ResponseEntity.ok(editAccountService.editPersonData(email, request));
+        String id = authentication.getName();
+       return ResponseEntity.ok(editAccountService.editPersonData(id, request));
 
     }
 
     @DeleteMapping("/me")
-    public ResponseEntity<Void> deleteMyAccount(
+    public ResponseEntity<DropPersonDataResponseDto> deleteMyAccount(
             @Valid @RequestBody DropPersonDataRequestDto request,
             Authentication authentication) {
 
-        String email = authentication.getName();
+        String id = authentication.getName();
+        return ResponseEntity.ok(dropAccountService.dropPersonData(id, request));
 
-        dropAccountService.dropPersonData(email, request);
-        return ResponseEntity.noContent().build();
     }
 
 

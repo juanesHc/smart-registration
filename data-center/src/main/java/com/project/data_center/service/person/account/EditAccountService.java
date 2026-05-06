@@ -23,15 +23,15 @@ public class EditAccountService {
     private final PersonMapper personMapper;
 
     @Transactional
-    public UpdatePersonDataResponseDto editPersonData(String email, UpdatePersonDataRequestDto request) {
-        log.info("Updating person data for email: {}", email);
+    public UpdatePersonDataResponseDto editPersonData(String id, UpdatePersonDataRequestDto request) {
+        log.info("Updating person data for id: {}", id);
 
-        PersonEntity person = personRepository.findByEmail(email)
+        PersonEntity person = personRepository.findById(UUID.fromString(id))
                 .orElseThrow(() -> new EditPersonDataException(MessageCodes.PERSON_NOT_FOUND));
 
         personMapper.updatePersonFromDto(request, person);
 
-        log.info("Person updated successfully: {}", email);
+        log.info("Person updated successfully: {}", id);
         return new UpdatePersonDataResponseDto(MessageCodes.UPDATE_SUCCESS);
     }
 

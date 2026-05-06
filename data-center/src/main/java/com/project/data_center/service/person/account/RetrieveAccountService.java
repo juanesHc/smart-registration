@@ -21,8 +21,8 @@ public class RetrieveAccountService {
     private final PersonRepository personRepository;
     private final PersonMapper personMapper;
 
-    public RetrievePersonDataResponseDto retrievePersonData(String email){
-        PersonEntity personEntity=personRepository.findByEmail((email)).
+    public RetrievePersonDataResponseDto retrievePersonData(String id){
+        PersonEntity personEntity=personRepository.findById(UUID.fromString((id))).
                 orElseThrow(()->new RetrievePersonDataException(MessageCodes.PERSON_NOT_FOUND));
 
         return personMapper.toRetrieveDto(personEntity);

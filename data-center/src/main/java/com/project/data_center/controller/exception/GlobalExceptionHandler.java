@@ -1,4 +1,4 @@
-package com.project.data_center.controller.error;
+package com.project.data_center.controller.exception;
 
 import com.project.data_center.entity.enums.MessageCodes;
 import com.project.data_center.exception.*;
@@ -51,6 +51,12 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(RetrieveTypeId.class)
     public ResponseEntity<Map<String, Object>> handleRetrieveTypeId(RetrieveTypeId ex) {
         log.warn("Type ID retrieval error: {}", ex.getMessage());
+        return buildResponse(HttpStatus.NOT_FOUND, ex.getMessage());
+    }
+
+    @ExceptionHandler(LoginException.class)
+    public ResponseEntity<Map<String, Object>> handleLogin(LoginException ex) {
+        log.warn("Login error: {}", ex.getMessage());
         return buildResponse(HttpStatus.NOT_FOUND, ex.getMessage());
     }
 
