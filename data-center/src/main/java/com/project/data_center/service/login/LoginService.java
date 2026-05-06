@@ -4,6 +4,7 @@ import com.project.data_center.dto.person.request.LoginRequestDto;
 import com.project.data_center.dto.person.response.LoginResponseDto;
 import com.project.data_center.entity.PersonEntity;
 import com.project.data_center.entity.enums.MessageCodes;
+import com.project.data_center.entity.security.SecurityUser;
 import com.project.data_center.exception.LoginException;
 import com.project.data_center.exception.RetrievePersonDataException;
 import com.project.data_center.repository.PersonRepository;
@@ -44,7 +45,8 @@ public class LoginService {
 
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         LoginResponseDto loginResponseDto = new LoginResponseDto();
-        loginResponseDto.setToken(jwtService.generateToken(userDetails,personEntity.getId()));
+        SecurityUser securityUser=new SecurityUser(personEntity);
+        loginResponseDto.setToken(jwtService.generateToken(securityUser));
 
         return loginResponseDto;
     }
