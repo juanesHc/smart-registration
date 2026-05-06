@@ -1,5 +1,6 @@
 package com.project.data_center.controller.person.account;
 
+import com.project.data_center.dto.person.request.DropPersonDataRequestDto;
 import com.project.data_center.dto.person.request.UpdatePersonDataRequestDto;
 import com.project.data_center.dto.person.response.DropPersonDataResponseDto;
 import com.project.data_center.dto.person.response.RetrievePersonDataResponseDto;
@@ -39,10 +40,15 @@ public class AccountController {
 
     }
 
-    @DeleteMapping("/delete/me")
-    public ResponseEntity<DropPersonDataResponseDto>  deletePersonData(Authentication authentication){
+    @DeleteMapping("/me")
+    public ResponseEntity<Void> deleteMyAccount(
+            @Valid @RequestBody DropPersonDataRequestDto request,
+            Authentication authentication) {
+
         String email = authentication.getName();
-        return ResponseEntity.ok(dropAccountService.dropPersonData(email));
+
+        dropAccountService.dropPersonData(email, request);
+        return ResponseEntity.noContent().build();
     }
 
 
