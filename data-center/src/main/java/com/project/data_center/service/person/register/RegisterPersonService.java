@@ -5,6 +5,7 @@ import com.project.data_center.dto.person.response.RegisterPersonResponseDto;
 import com.project.data_center.entity.PersonEntity;
 import com.project.data_center.entity.TypeIdEntity;
 import com.project.data_center.entity.enums.DocumentTypeEnum;
+import com.project.data_center.entity.enums.MessageCodes;
 import com.project.data_center.exception.RegisterPersonException;
 import com.project.data_center.mapper.PersonMapper;
 import com.project.data_center.repository.PersonRepository;
@@ -32,13 +33,13 @@ public class RegisterPersonService {
             DocumentTypeEnum documentTypeEnum = parseDocumentType(request.getDocumentType());
 
             TypeIdEntity typeIdEntity = typeIdRepository.findByCode(documentTypeEnum)
-                    .orElseThrow(() -> new RegisterPersonException("DOCUMENT_TYPE_NOT_FOUND"));
+                    .orElseThrow(() -> new RegisterPersonException(MessageCodes.DOCUMENT_TYPE_NOT_FOUND));
 
             if (personRepository.existsByEmail(request.getEmail())) {
-                throw new RegisterPersonException("EMAIL_ALREADY_EXISTS");
+                throw new RegisterPersonException(MessageCodes.EMAIL_ALREADY_EXISTS);
             }
             if (personRepository.existsByNumberId(request.getNumberId())) {
-                throw new RegisterPersonException("DOCUMENT_NUMBER_ALREADY_EXISTS");
+                throw new RegisterPersonException(MessageCodes.DOCUMENT_NUMBER_ALREADY_EXISTS);
             }
 
             String hashedPassword = passwordEncoder.encode(request.getPassword());
@@ -46,14 +47,14 @@ public class RegisterPersonService {
             PersonEntity saved = personRepository.save(personEntity);
 
             log.info("Person registered successfully with id: {}", saved.getId());
-            return new RegisterPersonResponseDto("REGISTRATION_SUCCESS");
+            return new RegisterPersonResponseDto(MessageCodes.REGISTRATION_SUCCESS);
         }
 
     private DocumentTypeEnum parseDocumentType(String documentType) {
         try {
             return DocumentTypeEnum.valueOf(documentType.toUpperCase());
         } catch (IllegalArgumentException ex) {
-            throw new RegisterPersonException("DOCUMENT_TYPE_INVALID");
+            throw new RegisterPersonException(MessageCodes.DOCUMENT_TYPE_INVALID);
         }
 }
 }
