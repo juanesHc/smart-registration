@@ -8,19 +8,9 @@ export const jwtInterceptor: HttpInterceptorFn = (req, next) => {
   const cookieService = inject(CookieService);
   const token = cookieService.getToken();
 
-  const isBackendRequest =
-    req.url.startsWith(environment.apiUrlJava) || req.url.startsWith(environment.apiUrlPython);
+  const isJavaRequest = req.url.startsWith(environment.apiUrlJava);
 
-  // TEMP DEBUG — remove after diagnosing 401 issue
-  console.log('[jwt-interceptor]', {
-    url: req.url,
-    apiUrlJava: environment.apiUrlJava,
-    isBackendRequest,
-    hasToken: !!token,
-    tokenPrefix: token ? token.substring(0, 20) + '...' : null
-  });
-
-  if (token && isBackendRequest) {
+  if (token && isJavaRequest) {
     const authReq = req.clone({
       setHeaders: {
         Authorization: `Bearer ${token}`

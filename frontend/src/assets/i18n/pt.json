@@ -44,10 +44,18 @@
     "TOKEN_INVALID": "Sessão inválida",
     "PERSON_NOT_FOUND": "Pessoa não encontrada",
     "RESOURCE_NOT_FOUND": "Recurso não encontrado",
-    "INTERNAL_ERROR": "Erro interno do servidor"
+    "INTERNAL_ERROR": "Erro interno do servidor",
+    "PDF_FILE_REQUIRED": "Selecione um arquivo PDF",
+    "PDF_FILE_INVALID_TYPE": "O arquivo deve ser um PDF",
+    "PDF_FILE_TOO_LARGE": "O arquivo excede o tamanho máximo permitido",
+    "PDF_FILE_UNREADABLE": "Não foi possível ler o PDF",
+    "EXTRACTION_FAILED": "Não foi possível extrair os dados do PDF",
+    "CLAUDE_API_ERROR": "Erro no serviço de IA. Por favor tente novamente",
+    "CLAUDE_RATE_LIMITED": "Muitas solicitações. Aguarde um momento e tente novamente"
   },
   "success": {
     "REGISTRATION_SUCCESS": "Registro bem-sucedido",
+    "EXTRACTION_SUCCESS": "Dados extraídos com sucesso",
     "UPDATE_SUCCESS": "Dados atualizados com sucesso",
     "ELIMINATION_SUCCESS": "Conta eliminada com sucesso",
     "LOGIN_SUCCESS": "Sessão iniciada com sucesso",
@@ -62,6 +70,7 @@
     "CONFIRM_UPDATE": "Confirmar alterações?",
     "CONFIRM_DELETE": "Esta ação não pode ser desfeita",
     "CONFIRM_LOGOUT": "Encerrar sessão?",
+    "CONFIRM_BACK_TO_UPLOAD": "Enviar outro PDF? Você perderá os dados atuais.",
     "BUTTON_CONFIRM": "Confirmar",
     "BUTTON_CANCEL": "Cancelar",
     "BUTTON_SAVE": "Salvar",
@@ -150,6 +159,20 @@
     "LOADING_DOCUMENT_TYPES": "Carregando...",
     "SUBMIT_BUTTON": "Criar conta",
     "DOCUMENT_NUMBER_HINT_DIGITS": "Apenas dígitos (6 a 15)",
-    "DOCUMENT_NUMBER_HINT_PASSPORT": "Letras maiúsculas e dígitos (6 a 15)"
+    "DOCUMENT_NUMBER_HINT_PASSPORT": "Letras maiúsculas e dígitos (6 a 15)",
+    "UPLOAD_INSTRUCTIONS": "Envie seu currículo em PDF e nossa IA extrairá seus dados automaticamente. Depois você poderá revisá-los e preencher o que faltar.",
+    "UPLOAD_DROPZONE_TEXT": "Arraste seu PDF aqui",
+    "UPLOAD_OR": "ou",
+    "UPLOAD_BROWSE": "Buscar arquivo",
+    "UPLOAD_SIZE_LIMIT": "Tamanho máximo: {{size}} MB",
+    "UPLOAD_REMOVE_FILE": "Remover arquivo",
+    "UPLOAD_PROCESSING": "Analisando seu PDF com IA...",
+    "UPLOAD_PROCESSING_HINT": "Isso pode levar alguns segundos",
+    "UPLOAD_PROCESS_BUTTON": "Processar com IA",
+    "REVIEW_TITLE": "Revise seus dados",
+    "REVIEW_SUBTITLE": "Extraímos {{extracted}} campos em {{time}} segundos. Os campos destacados em azul vêm do seu CV. Complete os demais.",
+    "EXTRACTED_BY_AI": "Extraído automaticamente pela IA",
+    "BACK_TO_UPLOAD": "Enviar outro PDF",
+    "ADDRESS_AI_HINT": "Detectamos este endereço no seu CV: \"{{address}}\". Por favor, confirme no mapa para obter as coordenadas exatas."
   }
 }

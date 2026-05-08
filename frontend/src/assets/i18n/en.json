@@ -44,10 +44,18 @@
     "TOKEN_INVALID": "Invalid session",
     "PERSON_NOT_FOUND": "Person not found",
     "RESOURCE_NOT_FOUND": "Resource not found",
-    "INTERNAL_ERROR": "Internal server error"
+    "INTERNAL_ERROR": "Internal server error",
+    "PDF_FILE_REQUIRED": "Please select a PDF file",
+    "PDF_FILE_INVALID_TYPE": "The file must be a PDF",
+    "PDF_FILE_TOO_LARGE": "The file exceeds the maximum allowed size",
+    "PDF_FILE_UNREADABLE": "The PDF could not be read",
+    "EXTRACTION_FAILED": "Could not extract data from the PDF",
+    "CLAUDE_API_ERROR": "AI service error. Please try again",
+    "CLAUDE_RATE_LIMITED": "Too many requests. Please wait a moment and try again"
   },
   "success": {
     "REGISTRATION_SUCCESS": "Registration successful",
+    "EXTRACTION_SUCCESS": "Data extracted successfully",
     "UPDATE_SUCCESS": "Data updated successfully",
     "ELIMINATION_SUCCESS": "Account deleted successfully",
     "LOGIN_SUCCESS": "Signed in successfully",
@@ -62,6 +70,7 @@
     "CONFIRM_UPDATE": "Confirm changes?",
     "CONFIRM_DELETE": "This action cannot be undone",
     "CONFIRM_LOGOUT": "Sign out?",
+    "CONFIRM_BACK_TO_UPLOAD": "Upload another PDF? You'll lose the current data.",
     "BUTTON_CONFIRM": "Confirm",
     "BUTTON_CANCEL": "Cancel",
     "BUTTON_SAVE": "Save",
@@ -150,6 +159,20 @@
     "LOADING_DOCUMENT_TYPES": "Loading...",
     "SUBMIT_BUTTON": "Create account",
     "DOCUMENT_NUMBER_HINT_DIGITS": "Digits only (6 to 15)",
-    "DOCUMENT_NUMBER_HINT_PASSPORT": "Uppercase letters and digits (6 to 15)"
+    "DOCUMENT_NUMBER_HINT_PASSPORT": "Uppercase letters and digits (6 to 15)",
+    "UPLOAD_INSTRUCTIONS": "Upload your resume as a PDF and our AI will extract your data automatically. You'll then be able to review it and complete anything missing.",
+    "UPLOAD_DROPZONE_TEXT": "Drag your PDF here",
+    "UPLOAD_OR": "or",
+    "UPLOAD_BROWSE": "Browse file",
+    "UPLOAD_SIZE_LIMIT": "Maximum size: {{size}} MB",
+    "UPLOAD_REMOVE_FILE": "Remove file",
+    "UPLOAD_PROCESSING": "Analyzing your PDF with AI...",
+    "UPLOAD_PROCESSING_HINT": "This may take a few seconds",
+    "UPLOAD_PROCESS_BUTTON": "Process with AI",
+    "REVIEW_TITLE": "Review your data",
+    "REVIEW_SUBTITLE": "We extracted {{extracted}} fields in {{time}} seconds. Fields highlighted in blue come from your CV. Complete the rest.",
+    "EXTRACTED_BY_AI": "Automatically extracted by AI",
+    "BACK_TO_UPLOAD": "Upload another PDF",
+    "ADDRESS_AI_HINT": "We detected this address in your CV: \"{{address}}\". Please confirm it on the map to get the exact coordinates."
   }
 }

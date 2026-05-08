@@ -1,5 +1,11 @@
-<div class="placeholder">
-  <mat-icon class="placeholder-icon">auto_awesome</mat-icon>
-  <h3 class="placeholder-title">{{ 'register.INTELLIGENT_COMING_SOON_TITLE' | translate }}</h3>
-  <p class="placeholder-text">{{ 'register.INTELLIGENT_COMING_SOON_TEXT' | translate }}</p>
+<div class="intelligent-flow">
+  @if (currentStep() === 'upload') {
+    <app-upload-step (extractionComplete)="onExtractionComplete($event)" />
+  } @else {
+    @if (extractionResult(); as result) {
+      <app-review-step
+        [extractionResult]="result"
+        (backToUpload)="onBackToUpload()" />
+    }
+  }
 </div>
