@@ -63,6 +63,11 @@ public final class MessageCodes {
         public static final String EMAIL_MUST_BE_GMAIL = "EMAIL_MUST_BE_GMAIL";
         public static final String PASSWORDS_DO_NOT_MATCH = "PASSWORDS_DO_NOT_MATCH";
 
+        public static final String NOT_FOUND_TITLE = "NOT_FOUND_TITLE";
+        public static final String NOT_FOUND_MESSAGE = "NOT_FOUND_MESSAGE";
+        public static final String NOT_FOUND_GO_LOGIN = "NOT_FOUND_GO_LOGIN";
+        public static final String NOT_FOUND_GO_ACCOUNT = "NOT_FOUND_GO_ACCOUNT";
 
+        public static final String RESOURCE_NOT_FOUND = "RESOURCE_NOT_FOUND";
 
 }

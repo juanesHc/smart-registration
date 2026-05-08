@@ -34,7 +34,7 @@ public class RegisterPersonRequestDto {
     private String phone;
 
     @NotBlank(message = MessageCodes.DOCUMENT_NUMBER_REQUIRED)
-    @Pattern(regexp = "^\\d+$", message = MessageCodes.DOCUMENT_NUMBER_FORMAT_INVALID)
+    @Pattern(regexp = "^[A-Z0-9]+$", message = MessageCodes.DOCUMENT_NUMBER_FORMAT_INVALID)
     @Size(min = 6, max = 15, message = MessageCodes.DOCUMENT_NUMBER_LENGTH_INVALID)
     private String numberId;
 

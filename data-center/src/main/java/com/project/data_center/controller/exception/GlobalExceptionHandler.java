@@ -9,6 +9,8 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.servlet.NoHandlerFoundException;
+import org.springframework.web.servlet.resource.NoResourceFoundException;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
@@ -71,6 +73,12 @@ public class GlobalExceptionHandler {
         return buildResponse(status, ex.getMessage());
     }
 
+
+    @ExceptionHandler({NoResourceFoundException.class, NoHandlerFoundException.class})
+    public ResponseEntity<Map<String, Object>> handleNotFound(Exception ex) {
+        log.warn("Resource not found: {}", ex.getMessage());
+        return buildResponse(HttpStatus.NOT_FOUND, MessageCodes.RESOURCE_NOT_FOUND);
+    }
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Map<String, Object>> handleGenericException(Exception ex) {

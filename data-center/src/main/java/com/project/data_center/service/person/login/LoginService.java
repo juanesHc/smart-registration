@@ -24,14 +24,9 @@ public class LoginService {
     private final PersonRepository personRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
-    private final static String gmailExtension="@gmail.com";
 
     public LoginResponseDto login(LoginRequestDto loginRequestDto) {
 
-        if(!loginRequestDto.getEmail().contains(gmailExtension)){
-            loginRequestDto.setEmail(loginRequestDto.getEmail()+gmailExtension);
-        }
-        log.info(loginRequestDto.getEmail());
         PersonEntity personEntity=personRepository.findByEmail((loginRequestDto.getEmail())).
                 orElseThrow(()->new RetrievePersonDataException(MessageCodes.PERSON_NOT_FOUND));
 

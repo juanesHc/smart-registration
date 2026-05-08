@@ -1,0 +1,89 @@
+<div class="address-picker">
+  <mat-form-field appearance="outline" class="search-field">
+    <mat-label>{{ 'address.SEARCH_LABEL' | translate }}</mat-label>
+    <input
+      type="text"
+      matInput
+      [formControl]="searchControl"
+      [matAutocomplete]="auto"
+      [placeholder]="'address.SEARCH_PLACEHOLDER' | translate" />
+    <mat-icon matPrefix>search</mat-icon>
+    @if (searching()) {
+      <mat-progress-spinner matSuffix diameter="20" mode="indeterminate" />
+    }
+    <mat-hint>{{ 'address.SEARCH_HINT' | translate }}</mat-hint>
+  </mat-form-field>
+
+  <mat-autocomplete
+    #auto="matAutocomplete"
+    [displayWith]="displayFn"
+    (optionSelected)="onSuggestionSelected($event)">
+    @for (result of suggestions(); track result.place_id) {
+      <mat-option [value]="result">
+        <div class="suggestion">
+          <mat-icon>location_on</mat-icon>
+          <span class="suggestion-text">{{ result.display_name }}</span>
+        </div>
+      </mat-option>
+    }
+  </mat-autocomplete>
+
+  <div class="map-wrapper">
+    <div #mapContainer class="map-container"></div>
+
+    <div class="center-pin" [class.is-moving]="isMoving()" aria-hidden="true">
+      <mat-icon class="pin-icon">place</mat-icon>
+      <div class="pin-shadow"></div>
+    </div>
+
+    <div class="map-instruction" [class.fade-out]="selectedAddress() !== null">
+      <mat-icon>open_with</mat-icon>
+      <span>{{ 'address.MOVE_TO_SELECT' | translate }}</span>
+    </div>
+
+    <div class="map-actions">
+      <button
+        type="button"
+        class="map-action-btn"
+        (click)="useMyLocation()"
+        [disabled]="geolocating()"
+        [matTooltip]="'address.USE_MY_LOCATION' | translate">
+        @if (geolocating()) {
+          <mat-progress-spinner diameter="20" mode="indeterminate" />
+        } @else {
+          <mat-icon>my_location</mat-icon>
+        }
+      </button>
+      <button
+        type="button"
+        class="map-action-btn"
+        (click)="recenterOnSelection()"
+        [disabled]="!selectedAddress()"
+        [matTooltip]="'address.RECENTER' | translate">
+        <mat-icon>filter_center_focus</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  @if (geolocationError(); as err) {
+    <p class="geo-error">
+      <mat-icon>error_outline</mat-icon>
+      {{ ('address.GEO_' + err) | translate }}
+    </p>
+  }
+
+  @if (selectedAddress(); as addr) {
+    <div class="selected-info">
+      <mat-icon class="check-icon">check_circle</mat-icon>
+      <div class="info-text">
+        <strong>{{ 'address.SELECTED_LABEL' | translate }}</strong>
+        <span class="address-text">{{ addr.address }}</span>
+        <span class="coords">
+          {{ addr.latitude | number:'1.4-4' }}, {{ addr.longitude | number:'1.4-4' }}
+        </span>
+      </div>
+    </div>
+  } @else {
+    <p class="hint-text">{{ 'address.NO_SELECTION' | translate }}</p>
+  }
+</div>

@@ -1,0 +1,59 @@
+<div class="delete-dialog">
+  <h2 mat-dialog-title class="dialog-title">
+    <mat-icon class="warning-icon">warning</mat-icon>
+    {{ 'dashboard.DELETE_TITLE' | translate }}
+  </h2>
+
+  <mat-dialog-content>
+    <p class="warning-message">
+      {{ 'ui.CONFIRM_DELETE' | translate }}
+    </p>
+
+    <p class="instruction">
+      {{ 'dashboard.DELETE_INSTRUCTION' | translate }}
+    </p>
+
+    <form [formGroup]="form" (ngSubmit)="onDelete()">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>{{ 'dashboard.FIELD_CURRENT_PASSWORD' | translate }}</mat-label>
+        <input
+          matInput
+          [type]="hidePassword() ? 'password' : 'text'"
+          formControlName="currentPassword"
+          autocomplete="current-password" />
+        <button
+          type="button"
+          mat-icon-button
+          matSuffix
+          (click)="togglePassword()">
+          <mat-icon>{{ hidePassword() ? 'visibility_off' : 'visibility' }}</mat-icon>
+        </button>
+        @if (form.controls.currentPassword.touched && form.controls.currentPassword.hasError('required')) {
+          <mat-error>{{ 'errors.PASSWORD_REQUIRED' | translate }}</mat-error>
+        }
+      </mat-form-field>
+    </form>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button
+      mat-stroked-button
+      (click)="onCancel()"
+      [disabled]="deleting()">
+      {{ 'ui.BUTTON_CANCEL' | translate }}
+    </button>
+
+    <button
+      mat-flat-button
+      color="warn"
+      (click)="onDelete()"
+      [disabled]="deleting() || form.invalid">
+      @if (deleting()) {
+        <mat-progress-spinner diameter="20" mode="indeterminate" />
+      } @else {
+        <mat-icon>delete_forever</mat-icon>
+        {{ 'dashboard.DELETE_CONFIRM' | translate }}
+      }
+    </button>
+  </mat-dialog-actions>
+</div>

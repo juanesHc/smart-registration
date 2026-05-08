@@ -1,0 +1,79 @@
+:host {
+  display: block;
+  min-height: 100vh;
+}
+
+.register-container {
+  min-height: 100vh;
+  padding: var(--spacing-lg) var(--spacing-md);
+  background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-primary) 100%);
+  position: relative;
+}
+
+.language-selector-wrapper {
+  position: absolute;
+  top: var(--spacing-md);
+  right: var(--spacing-md);
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  margin-bottom: var(--spacing-md);
+  color: var(--color-white);
+  text-decoration: none;
+  font-weight: 500;
+  transition: opacity 0.2s;
+
+  &:hover {
+    opacity: 0.85;
+  }
+}
+
+.register-card {
+  max-width: 720px;
+  margin: 0 auto;
+  border-radius: var(--radius-lg);
+  background-color: var(--color-white);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+
+  mat-card-header {
+    padding: var(--spacing-lg) var(--spacing-lg) 0;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+
+    mat-card-title {
+      font-size: 1.75rem;
+      font-weight: 500;
+      color: var(--color-text);
+      margin-bottom: var(--spacing-xs);
+    }
+
+    mat-card-subtitle {
+      color: var(--color-text-secondary);
+    }
+  }
+
+  mat-card-content {
+    padding: var(--spacing-md) 0 0 0;
+  }
+}
+
+.register-tabs {
+  ::ng-deep {
+    .mat-mdc-tab-header {
+      padding: 0 var(--spacing-lg);
+    }
+  }
+}
+
+.tab-icon {
+  margin-right: var(--spacing-xs);
+  vertical-align: middle;
+}
+
+.tab-content {
+  padding: var(--spacing-lg);
+}

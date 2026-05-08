@@ -1,0 +1,41 @@
+<div class="register-container">
+  <div class="language-selector-wrapper">
+    <app-language-selector />
+  </div>
+
+  <a routerLink="/login" class="back-link">
+    <mat-icon>arrow_back</mat-icon>
+    <span>{{ 'register.BACK_TO_LOGIN' | translate }}</span>
+  </a>
+
+  <mat-card class="register-card">
+    <mat-card-header>
+      <mat-card-title>{{ 'register.TITLE' | translate }}</mat-card-title>
+      <mat-card-subtitle>{{ 'register.SUBTITLE' | translate }}</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <mat-tab-group [selectedIndex]="0" class="register-tabs">
+        <mat-tab>
+          <ng-template mat-tab-label>
+            <mat-icon class="tab-icon">auto_awesome</mat-icon>
+            {{ 'register.TAB_INTELLIGENT' | translate }}
+          </ng-template>
+          <div class="tab-content">
+            <app-intelligent-register-form />
+          </div>
+        </mat-tab>
+
+        <mat-tab>
+          <ng-template mat-tab-label>
+            <mat-icon class="tab-icon">edit</mat-icon>
+            {{ 'register.TAB_MANUAL' | translate }}
+          </ng-template>
+          <div class="tab-content">
+            <app-manual-register-form />
+          </div>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-card-content>
+  </mat-card>
+</div>

@@ -1,0 +1,29 @@
+.delete-dialog {
+  padding: var(--spacing-md);
+}
+
+.dialog-title {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  color: var(--color-error);
+
+  .warning-icon {
+    color: var(--color-error);
+  }
+}
+
+.warning-message {
+  color: var(--color-error);
+  font-weight: 500;
+  margin: 0 0 var(--spacing-md) 0;
+}
+
+.instruction {
+  color: var(--color-text-secondary);
+  margin: 0 0 var(--spacing-md) 0;
+}
+
+.full-width {
+  width: 100%;
+}
