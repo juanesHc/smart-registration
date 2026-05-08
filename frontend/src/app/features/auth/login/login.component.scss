@@ -1,0 +1,95 @@
+:host {
+  display: block;
+  min-height: 100vh;
+}
+
+.login-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: var(--spacing-md);
+  background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-primary) 100%);
+}
+
+.language-selector-wrapper {
+  position: absolute;
+  top: var(--spacing-md);
+  right: var(--spacing-md);
+
+  ::ng-deep .mat-mdc-form-field-subscript-wrapper {
+    display: none;
+  }
+
+  ::ng-deep .mat-mdc-form-field {
+    background-color: var(--color-white);
+    border-radius: var(--radius-sm);
+  }
+}
+
+.login-card {
+  width: 100%;
+  max-width: 420px;
+  padding: var(--spacing-lg);
+  border-radius: var(--radius-lg);
+  background-color: var(--color-white);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+}
+
+mat-card-header {
+  display: flex;
+  justify-content: center;
+  margin-bottom: var(--spacing-lg);
+
+  mat-card-title {
+    font-size: 1.75rem;
+    font-weight: 500;
+    color: var(--color-text);
+  }
+}
+
+.full-width {
+  width: 100%;
+  margin-bottom: var(--spacing-sm);
+}
+
+.submit-button {
+  margin-top: var(--spacing-md);
+  height: 48px;
+  font-size: 1rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  mat-progress-spinner {
+    display: inline-block;
+
+    ::ng-deep circle {
+      stroke: var(--color-white);
+    }
+  }
+}
+
+.login-footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--spacing-xs);
+  margin-top: var(--spacing-lg);
+  padding-top: var(--spacing-md);
+  border-top: 1px solid #e0e0e0;
+  color: var(--color-text-secondary);
+
+  .register-link {
+    color: var(--color-accent);
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.2s;
+
+    &:hover {
+      color: var(--color-primary);
+      text-decoration: underline;
+    }
+  }
+}

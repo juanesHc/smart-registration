@@ -1,0 +1,65 @@
+<div class="dashboard-container">
+  <header class="dashboard-header">
+    <div class="header-left">
+      <mat-icon class="header-icon">account_circle</mat-icon>
+      <div class="header-greeting">
+        <span class="greeting-label">{{ 'dashboard.GREETING' | translate }}</span>
+        <span class="user-name">{{ state.fullName() }}</span>
+      </div>
+    </div>
+
+    <div class="header-right">
+      <app-language-selector />
+      <button
+        mat-icon-button
+        (click)="onLogout()"
+        [matTooltip]="'dashboard.LOGOUT' | translate">
+        <mat-icon>logout</mat-icon>
+      </button>
+    </div>
+  </header>
+
+  <main class="dashboard-content">
+    @if (state.loading() && !state.personData()) {
+      <div class="loading-container">
+        <mat-progress-spinner diameter="48" mode="indeterminate" />
+      </div>
+    } @else if (state.personData()) {
+      <mat-card class="account-card">
+        <mat-card-header>
+          <mat-card-title>{{ 'dashboard.MY_ACCOUNT' | translate }}</mat-card-title>
+          @if (!state.editMode()) {
+            <button
+              mat-icon-button
+              color="primary"
+              class="edit-button"
+              (click)="state.toggleEditMode()"
+              [matTooltip]="'dashboard.EDIT' | translate">
+              <mat-icon>edit</mat-icon>
+            </button>
+          }
+        </mat-card-header>
+
+        <mat-card-content>
+          @if (state.editMode()) {
+            <app-account-edit-form />
+          } @else {
+            <app-account-view />
+          }
+        </mat-card-content>
+
+        @if (!state.editMode()) {
+          <mat-card-actions class="card-actions">
+            <button
+              mat-stroked-button
+              color="warn"
+              (click)="onDeleteAccount()">
+              <mat-icon>delete_forever</mat-icon>
+              {{ 'dashboard.DELETE_ACCOUNT' | translate }}
+            </button>
+          </mat-card-actions>
+        }
+      </mat-card>
+    }
+  </main>
+</div>

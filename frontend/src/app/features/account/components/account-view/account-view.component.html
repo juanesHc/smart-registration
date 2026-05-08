@@ -1,0 +1,79 @@
+@if (state.personData(); as data) {
+  <div class="info-grid">
+    <section class="info-section">
+      <h3 class="section-title">
+        <mat-icon>person</mat-icon>
+        {{ 'dashboard.SECTION_PERSONAL' | translate }}
+      </h3>
+      <div class="info-row">
+        <span class="label">{{ 'dashboard.FIELD_FIRST_NAME' | translate }}</span>
+        <span class="value">{{ data.firstName }}</span>
+      </div>
+      <div class="info-row">
+        <span class="label">{{ 'dashboard.FIELD_LAST_NAME' | translate }}</span>
+        <span class="value">{{ data.lastName }}</span>
+      </div>
+      <div class="info-row">
+        <span class="label">{{ 'dashboard.FIELD_DOCUMENT_TYPE' | translate }}</span>
+        <span class="value">{{ ('documentTypes.' + data.documentType) | translate }}</span>
+      </div>
+      <div class="info-row">
+        <span class="label">{{ 'dashboard.FIELD_DOCUMENT_NUMBER' | translate }}</span>
+        <span class="value">{{ data.numberId }}</span>
+      </div>
+    </section>
+
+    <mat-divider />
+
+    <section class="info-section">
+      <h3 class="section-title">
+        <mat-icon>contact_mail</mat-icon>
+        {{ 'dashboard.SECTION_CONTACT' | translate }}
+      </h3>
+      <div class="info-row">
+        <span class="label">{{ 'dashboard.FIELD_EMAIL' | translate }}</span>
+        <span class="value">{{ data.email }}</span>
+      </div>
+      <div class="info-row">
+        <span class="label">{{ 'dashboard.FIELD_PHONE' | translate }}</span>
+        <span class="value">{{ data.phone }}</span>
+      </div>
+    </section>
+
+    <mat-divider />
+
+    <section class="info-section">
+      <h3 class="section-title">
+        <mat-icon>location_on</mat-icon>
+        {{ 'dashboard.SECTION_ADDRESS' | translate }}
+      </h3>
+      <div class="info-row">
+        <span class="label">{{ 'dashboard.FIELD_ADDRESS' | translate }}</span>
+        <span class="value">{{ data.address }}</span>
+      </div>
+      <div class="info-row">
+        <span class="label">{{ 'dashboard.FIELD_CITY' | translate }}</span>
+        <span class="value">{{ data.city }}</span>
+      </div>
+      <div class="info-row">
+        <span class="label">{{ 'dashboard.FIELD_COUNTRY' | translate }}</span>
+        <span class="value">{{ data.country }}</span>
+      </div>
+      <div class="info-row">
+        <span class="label">{{ 'dashboard.FIELD_COORDINATES' | translate }}</span>
+        <span class="value">{{ data.latitude }}, {{ data.longitude }}</span>
+      </div>
+    </section>
+
+    @if (data.extraData) {
+      <mat-divider />
+      <section class="info-section">
+        <h3 class="section-title">
+          <mat-icon>notes</mat-icon>
+          {{ 'dashboard.SECTION_EXTRA' | translate }}
+        </h3>
+        <p class="extra-data">{{ data.extraData }}</p>
+      </section>
+    }
+  </div>
+}

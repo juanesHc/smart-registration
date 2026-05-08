@@ -1,0 +1,36 @@
+<div class="not-found-container">
+  <div class="language-selector-wrapper">
+    <app-language-selector />
+  </div>
+
+  <div class="not-found-card">
+    <div class="error-code">404</div>
+
+    <mat-icon class="error-icon">sentiment_dissatisfied</mat-icon>
+
+    <h1 class="error-title">{{ 'notFound.TITLE' | translate }}</h1>
+    <p class="error-message">{{ 'notFound.MESSAGE' | translate }}</p>
+
+    <div class="actions">
+      @if (isAuthenticated) {
+        <button
+          type="button"
+          mat-stroked-button
+          color="primary"
+          (click)="goToAccount()">
+          <mat-icon>account_circle</mat-icon>
+          {{ 'notFound.GO_ACCOUNT' | translate }}
+        </button>
+      }
+
+      <button
+        type="button"
+        mat-flat-button
+        color="primary"
+        (click)="goToLogin()">
+        <mat-icon>login</mat-icon>
+        {{ 'notFound.GO_LOGIN' | translate }}
+      </button>
+    </div>
+  </div>
+</div>

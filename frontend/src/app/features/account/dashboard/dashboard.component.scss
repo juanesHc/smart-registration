@@ -1,0 +1,103 @@
+:host {
+  display: block;
+  min-height: 100vh;
+  background-color: var(--color-background);
+}
+
+.dashboard-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-md) var(--spacing-lg);
+  background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-primary) 100%);
+  color: var(--color-white);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+  .header-left {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+
+    .header-icon {
+      font-size: 40px;
+      width: 40px;
+      height: 40px;
+    }
+
+    .header-greeting {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.2;
+
+      .greeting-label {
+        font-size: 0.85rem;
+        opacity: 0.9;
+      }
+
+      .user-name {
+        font-size: 1.1rem;
+        font-weight: 500;
+      }
+    }
+  }
+
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+
+    button[mat-icon-button] {
+      color: var(--color-white);
+    }
+  }
+}
+
+.dashboard-content {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  padding: var(--spacing-lg);
+}
+
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: var(--spacing-xl);
+}
+
+.account-card {
+  width: 100%;
+  max-width: 720px;
+  border-radius: var(--radius-lg);
+
+  mat-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-md) var(--spacing-lg) 0;
+
+    mat-card-title {
+      font-size: 1.5rem;
+      font-weight: 500;
+      color: var(--color-text);
+    }
+  }
+
+  mat-card-content {
+    padding: var(--spacing-lg);
+  }
+
+  .card-actions {
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-top: 1px solid #E0E0E0;
+    display: flex;
+    justify-content: flex-end;
+  }
+}

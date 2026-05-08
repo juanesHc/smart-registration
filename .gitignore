@@ -52,3 +52,4 @@ yarn-error.log*
 
 # ===== PostgreSQL data (si montas volumen local en vez de docker volume) =====
 postgres-data/
+memories.md

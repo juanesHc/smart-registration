@@ -1,0 +1,179 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="register-form">
+
+  <section class="form-section">
+    <h3 class="section-title">
+      <mat-icon>person</mat-icon>
+      {{ 'register.SECTION_PERSONAL' | translate }}
+    </h3>
+
+    <div class="form-row">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'register.FIELD_FIRST_NAME' | translate }}</mat-label>
+        <input matInput formControlName="firstName" autocomplete="given-name" />
+        @if (getErrorKey('firstName'); as key) {
+          <mat-error>{{ 'errors.' + key | translate }}</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'register.FIELD_LAST_NAME' | translate }}</mat-label>
+        <input matInput formControlName="lastName" autocomplete="family-name" />
+        @if (getErrorKey('lastName'); as key) {
+          <mat-error>{{ 'errors.' + key | translate }}</mat-error>
+        }
+      </mat-form-field>
+    </div>
+
+    <div class="form-row">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'register.FIELD_DOCUMENT_TYPE' | translate }}</mat-label>
+        <mat-select formControlName="documentType">
+          @if (loadingDocumentTypes()) {
+            <mat-option disabled>
+              {{ 'register.LOADING_DOCUMENT_TYPES' | translate }}
+            </mat-option>
+          } @else {
+            @for (type of documentTypes(); track type.code) {
+              <mat-option [value]="type.code">
+                {{ ('documentTypes.' + type.code) | translate }}
+              </mat-option>
+            }
+          }
+        </mat-select>
+        @if (getErrorKey('documentType'); as key) {
+          <mat-error>{{ 'errors.' + key | translate }}</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'register.FIELD_DOCUMENT_NUMBER' | translate }}</mat-label>
+        <input
+          matInput
+          formControlName="numberId"
+          [attr.inputmode]="numberIdInputMode()"
+          [attr.autocapitalize]="isPassport() ? 'characters' : 'off'"
+          autocomplete="off" />
+        @if (isPassport()) {
+          <mat-hint>{{ 'register.DOCUMENT_NUMBER_HINT_PASSPORT' | translate }}</mat-hint>
+        } @else {
+          <mat-hint>{{ 'register.DOCUMENT_NUMBER_HINT_DIGITS' | translate }}</mat-hint>
+        }
+        @if (getErrorKey('numberId'); as key) {
+          <mat-error>{{ 'errors.' + key | translate }}</mat-error>
+        }
+      </mat-form-field>
+    </div>
+  </section>
+
+  <mat-divider />
+
+  <section class="form-section">
+    <h3 class="section-title">
+      <mat-icon>contact_mail</mat-icon>
+      {{ 'register.SECTION_CONTACT' | translate }}
+    </h3>
+
+    <div class="form-row">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'register.FIELD_EMAIL' | translate }}</mat-label>
+        <input matInput type="email" formControlName="email" autocomplete="email" />
+        <mat-icon matPrefix>email</mat-icon>
+        @if (getErrorKey('email'); as key) {
+          <mat-error>{{ 'errors.' + key | translate }}</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'register.FIELD_PHONE' | translate }}</mat-label>
+        <input matInput type="tel" formControlName="phone" autocomplete="tel" inputmode="numeric" />
+        <mat-icon matPrefix>phone</mat-icon>
+        @if (getErrorKey('phone'); as key) {
+          <mat-error>{{ 'errors.' + key | translate }}</mat-error>
+        }
+      </mat-form-field>
+    </div>
+  </section>
+
+  <mat-divider />
+
+  <section class="form-section">
+    <h3 class="section-title">
+      <mat-icon>lock</mat-icon>
+      {{ 'register.SECTION_SECURITY' | translate }}
+    </h3>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>{{ 'register.FIELD_PASSWORD' | translate }}</mat-label>
+      <input
+        matInput
+        [type]="hidePassword() ? 'password' : 'text'"
+        formControlName="password"
+        autocomplete="new-password" />
+      <button
+        type="button"
+        mat-icon-button
+        matSuffix
+        (click)="togglePassword()">
+        <mat-icon>{{ hidePassword() ? 'visibility_off' : 'visibility' }}</mat-icon>
+      </button>
+      @if (getErrorKey('password'); as key) {
+        <mat-error>{{ 'errors.' + key | translate }}</mat-error>
+      }
+    </mat-form-field>
+
+    <app-password-strength [password]="passwordValue()" />
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>{{ 'register.FIELD_CONFIRM_PASSWORD' | translate }}</mat-label>
+      <input
+        matInput
+        [type]="hideConfirmPassword() ? 'password' : 'text'"
+        formControlName="confirmPassword"
+        autocomplete="new-password" />
+      <button
+        type="button"
+        mat-icon-button
+        matSuffix
+        (click)="toggleConfirmPassword()">
+        <mat-icon>{{ hideConfirmPassword() ? 'visibility_off' : 'visibility' }}</mat-icon>
+      </button>
+      @if (getErrorKey('confirmPassword'); as key) {
+        <mat-error>{{ 'errors.' + key | translate }}</mat-error>
+      }
+    </mat-form-field>
+  </section>
+
+  <mat-divider />
+
+  <section class="form-section">
+    <h3 class="section-title">
+      <mat-icon>location_on</mat-icon>
+      {{ 'register.SECTION_ADDRESS' | translate }}
+    </h3>
+
+    <app-address-picker formControlName="addressData" />
+
+    @if (form.get('addressData')?.touched && form.get('addressData')?.hasError('required')) {
+      <p class="address-error">
+        <mat-icon>error</mat-icon>
+        {{ 'errors.ADDRESS_REQUIRED' | translate }}
+      </p>
+    }
+  </section>
+
+  <div class="form-actions">
+    <button
+      type="submit"
+      mat-flat-button
+      color="primary"
+      class="submit-button"
+      [disabled]="registering()">
+      @if (registering()) {
+        <mat-progress-spinner diameter="20" mode="indeterminate" />
+      } @else {
+        <mat-icon>person_add</mat-icon>
+        {{ 'register.SUBMIT_BUTTON' | translate }}
+      }
+    </button>
+  </div>
+</form>

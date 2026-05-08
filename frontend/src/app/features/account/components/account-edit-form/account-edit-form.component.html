@@ -1,0 +1,72 @@
+<form [formGroup]="form" (ngSubmit)="onSave()" class="edit-form">
+  <section class="form-section">
+    <h3 class="section-title">{{ 'dashboard.SECTION_PERSONAL' | translate }}</h3>
+
+    <div class="form-row">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'dashboard.FIELD_FIRST_NAME' | translate }}</mat-label>
+        <input matInput formControlName="firstName" />
+        @if (getErrorKey('firstName'); as key) {
+          <mat-error>{{ 'errors.' + key | translate }}</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'dashboard.FIELD_LAST_NAME' | translate }}</mat-label>
+        <input matInput formControlName="lastName" />
+        @if (getErrorKey('lastName'); as key) {
+          <mat-error>{{ 'errors.' + key | translate }}</mat-error>
+        }
+      </mat-form-field>
+    </div>
+  </section>
+
+  <section class="form-section">
+    <h3 class="section-title">{{ 'dashboard.SECTION_CONTACT' | translate }}</h3>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>{{ 'dashboard.FIELD_PHONE' | translate }}</mat-label>
+      <input matInput formControlName="phone" />
+      @if (getErrorKey('phone'); as key) {
+        <mat-error>{{ 'errors.' + key | translate }}</mat-error>
+      }
+    </mat-form-field>
+  </section>
+
+  <section class="form-section">
+    <h3 class="section-title">{{ 'dashboard.SECTION_ADDRESS' | translate }}</h3>
+    <app-address-picker formControlName="addressData" />
+  </section>
+
+  <section class="form-section">
+    <h3 class="section-title">{{ 'dashboard.SECTION_EXTRA' | translate }}</h3>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>{{ 'dashboard.FIELD_EXTRA_DATA' | translate }}</mat-label>
+      <textarea matInput formControlName="extraData" rows="3"></textarea>
+    </mat-form-field>
+  </section>
+
+  <div class="form-actions">
+    <button
+      type="button"
+      mat-stroked-button
+      (click)="onCancel()"
+      [disabled]="saving()">
+      {{ 'ui.BUTTON_CANCEL' | translate }}
+    </button>
+
+    <button
+      type="submit"
+      mat-flat-button
+      color="primary"
+      [disabled]="saving()">
+      @if (saving()) {
+        <mat-progress-spinner diameter="20" mode="indeterminate" />
+      } @else {
+        <mat-icon>save</mat-icon>
+        {{ 'ui.BUTTON_SAVE' | translate }}
+      }
+    </button>
+  </div>
+</form>
