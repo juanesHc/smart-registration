@@ -7,6 +7,7 @@ export interface RegisterPersonRequest {
   password: string;
   confirmPassword: string;
   documentType: string;
+  extraData?: string | null;
   address: string;
   city: string;
   country: string;

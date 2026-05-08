@@ -5,3 +5,4 @@ pydantic-settings==2.6.0
 python-multipart==0.0.12
 python-dotenv==1.0.1
 anthropic==0.39.0
+httpx<0.28

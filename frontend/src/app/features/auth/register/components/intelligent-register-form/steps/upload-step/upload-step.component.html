@@ -1,0 +1,85 @@
+<div class="upload-step">
+  <div class="instructions">
+    <mat-icon class="info-icon">info</mat-icon>
+    <p>{{ 'register.UPLOAD_INSTRUCTIONS' | translate }}</p>
+  </div>
+
+  <input
+    #fileInput
+    type="file"
+    accept="application/pdf"
+    (change)="onFileSelected($event)"
+    hidden />
+
+  @if (!selectedFile()) {
+    <div
+      class="dropzone"
+      [class.dragging]="isDragging()"
+      (dragover)="onDragOver($event)"
+      (dragleave)="onDragLeave($event)"
+      (drop)="onDrop($event)">
+
+      <mat-icon class="upload-icon">cloud_upload</mat-icon>
+
+      <p class="dropzone-text">
+        {{ 'register.UPLOAD_DROPZONE_TEXT' | translate }}
+      </p>
+
+      <p class="dropzone-or">{{ 'register.UPLOAD_OR' | translate }}</p>
+
+      <button
+        type="button"
+        mat-flat-button
+        color="primary"
+        (click)="openFilePicker()">
+        <mat-icon>folder_open</mat-icon>
+        {{ 'register.UPLOAD_BROWSE' | translate }}
+      </button>
+
+      <p class="size-limit">
+        {{ 'register.UPLOAD_SIZE_LIMIT' | translate: { size: maxSizeMb } }}
+      </p>
+    </div>
+  } @else {
+    <div class="file-preview">
+      <mat-icon class="pdf-icon">picture_as_pdf</mat-icon>
+
+      <div class="file-info">
+        <span class="file-name">{{ selectedFile()!.name }}</span>
+        <span class="file-size">{{ formatFileSize(selectedFile()!.size) }}</span>
+      </div>
+
+      <button
+        type="button"
+        mat-icon-button
+        (click)="removeFile()"
+        [disabled]="processing()"
+        [attr.aria-label]="'register.UPLOAD_REMOVE_FILE' | translate">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+
+    @if (processing()) {
+      <div class="processing-status">
+        <mat-progress-bar mode="indeterminate" />
+        <p class="processing-text">
+          <mat-icon class="ai-icon">auto_awesome</mat-icon>
+          {{ 'register.UPLOAD_PROCESSING' | translate }}
+        </p>
+        <p class="processing-hint">
+          {{ 'register.UPLOAD_PROCESSING_HINT' | translate }}
+        </p>
+      </div>
+    } @else {
+      <button
+        type="button"
+        mat-flat-button
+        color="primary"
+        class="process-button"
+        (click)="processFile()">
+        <mat-icon>auto_awesome</mat-icon>
+        {{ 'register.UPLOAD_PROCESS_BUTTON' | translate }}
+      </button>
+    }
+  }
+</div>
